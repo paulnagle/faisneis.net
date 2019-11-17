@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Legislation
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>FIlter by Year -></ion-label>
+    <ion-datetime displayFormat="YYYY" [(ngModel)]="myDate" min="1901" max="2020" (ngModelChange)="getAllLegislation()"></ion-datetime>
+  </ion-item>
+  <div *ngIf="results">
+    <ion-card *ngFor="let result of results.results">
+      <ion-card-header>
+        <ion-card-title [innerHTML]="result.bill.shortTitleEn"></ion-card-title>
+        <ion-card-subtitle [innerHTML]="result.bill.shortTitleEn"></ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+          <p>
+             Year: {{result.bill.billYear}}
+          </p>
+
+      </ion-card-content>
+    </ion-card>
+</div>
+</ion-content>

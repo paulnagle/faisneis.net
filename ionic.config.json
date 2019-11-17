@@ -1,5 +1,7 @@
 {
   "name": "faisneis.net",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
