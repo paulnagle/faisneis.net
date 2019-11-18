@@ -20,6 +20,36 @@ export class AppComponent {
       title: 'Legislation',
       url: '/legislation',
       icon: 'paper'
+    },
+    {
+      title: 'Debates',
+      url: '/debates',
+      icon: 'paper'
+    },
+    {
+      title: 'Constituencies',
+      url: '/constituencies',
+      icon: 'paper'
+    },
+    {
+      title: 'Divisions',
+      url: '/divisions',
+      icon: 'paper'
+    },
+    {
+      title: 'Members',
+      url: '/members',
+      icon: 'paper'
+    },
+    {
+      title: 'Parties',
+      url: '/parties',
+      icon: 'paper'
+    },
+    {
+      title: 'Questions',
+      url: '/questions',
+      icon: 'paper'
     }
   ];
 

@@ -14,18 +14,149 @@
     <ion-label>FIlter by Year -></ion-label>
     <ion-datetime displayFormat="YYYY" [(ngModel)]="myDate" min="1901" max="2020" (ngModelChange)="getAllLegislation()"></ion-datetime>
   </ion-item>
-  <div *ngIf="results">
-    <ion-card *ngFor="let result of results.results">
-      <ion-card-header>
+  <div *ngIf="results" >
+    <ion-card *ngFor="let result of results.results; let i = index">
+      <ion-card-header (click)="toggleCard(i)">
+        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+
         <ion-card-title [innerHTML]="result.bill.shortTitleEn"></ion-card-title>
         <ion-card-subtitle [innerHTML]="result.bill.shortTitleEn"></ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content>
-          <p>
-             Year: {{result.bill.billYear}}
-          </p>
+      <div *ngIf="isCardShown(i)">
+        <ion-card-content>
 
-      </ion-card-content>
+          <div *ngIf="result.bill.longTitleEn">
+            <ion-item-divider><ion-label>Long Title</ion-label></ion-item-divider>
+            <p>{{result.bill.longTitleEn}}</p>
+          </div>
+
+          <div *ngIf="result.bill.amendmentLists.length">
+            <ion-item-divider><ion-label>Amendment Lists</ion-label></ion-item-divider>
+            <ul *ngFor="let amendment of result.bill.amendmentLists">
+              <li><b>Chamber: </b> {{amendment.amendmentList.chamber.showAs}} </li>
+              <li><b>Date: </b> {{amendment.amendmentList.date}} </li>
+              <li><b>Full PDF: </b> <a href="{{amendment.amendmentList.formats.pdf.uri}}">Click to view</a></li>
+              <li><b>Show As: </b> {{amendment.amendmentList.showAs}}</li>
+              <li><b>Stage: </b> {{amendment.amendmentList.stage.showAs}}</li>
+              <li><b>Stage Number: </b> {{amendment.amendmentList.stageNo}} </li>
+            </ul>
+          </div>
+
+          <div *ngIf="result.bill.billNo">
+            <ion-item-divider><ion-label>Bill Number</ion-label></ion-item-divider>
+            <p>{{result.bill.billNo}}</p>
+          </div>
+
+          <div *ngIf="result.bill.billType">
+            <ion-item-divider><ion-label>Bill Type</ion-label></ion-item-divider>
+            <p>{{result.bill.billType}}</p>
+          </div>
+
+          <div *ngIf="result.bill.debates.length">
+            <ion-item-divider><ion-label>Debates</ion-label></ion-item-divider>
+            <ul *ngFor="let debate of result.bill.debates">
+              <li><b>Chamber: </b> {{debate.chamber.showAs}} </li>
+              <li><b>Date: </b> {{debate.date}} </li>
+              <li><b>Debate Section Id: </b> {{debate.debateSectionId}}</li>
+              <li><b>Show As: </b> {{debate.showAs}}</li>
+              <li><b>Link: </b> <a href="{{debate.uri}}">Click to view</a></li>
+            </ul>
+          </div>
+
+          <div *ngIf="result.bill.events">
+            <div *ngIf="result.bill.events.length">
+              <ion-item-divider><ion-label>Events</ion-label></ion-item-divider>
+              <ul *ngFor="let event of result.bill.events;  let i = index">
+                <li *ngIf="result.bill.events[i].event.chamber"><b>Chamber: </b> {{event.event.chamber.showAs}} </li>
+                <li *ngIf="result.bill.events[i].event.dates[0].date"><b>Dates: </b> {{event.event.dates[0].date}} </li>
+                <li *ngIf="result.bill.events[i].event.house"><b>House: </b> {{event.event.house.showAs}}</li>
+                <li *ngIf="result.bill.events[i].event.house"><b>House Url: </b> {{event.event.house.uri}}</li>
+                <li *ngIf="result.bill.events[i].event.progressStage"><b>ProgressStage: </b> {{event.event.progressStage}}</li>
+                <li *ngIf="result.bill.events[i].event.showAs"><b>Show As: </b> {{event.event.showAs}}</li>
+                <li *ngIf="result.bill.events[i].event.stageCompleted"><b>Stage Completed: </b> {{event.event.stageCompleted}}</li>
+                <li *ngIf="result.bill.events[i].event.stageOutcome"><b>Stage Outcome: </b> {{event.event.stageOutcome}}</li>
+                <li *ngIf="result.bill.events[i].event.stageUri"><b>Stage Uri: </b> <a href="{{event.event.stageUri}}">Click to view</a></li>
+                <li *ngIf="result.bill.events[i].event.uri"><b>Uri: </b> <a href="{{event.event.uri}}">Click to view</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div *ngIf="result.bill.method">
+            <ion-item-divider><ion-label>Method</ion-label></ion-item-divider>
+            <p>{{result.bill.method}}</p>
+          </div>
+
+          <div *ngIf="result.bill.mostRecentStage">
+            <ion-item-divider><ion-label>Most Recent Stage</ion-label></ion-item-divider>
+            <ul>
+              <li *ngIf="result.bill.mostRecentStage.event.chamber"><b>Chamber: </b> {{result.bill.mostRecentStage.event.chamber.showAs}} </li>
+              <li *ngIf="result.bill.mostRecentStage.event.dates[0].date"><b>Dates: </b> {{result.bill.mostRecentStage.event.dates[0].date}} </li>
+              <li *ngIf="result.bill.mostRecentStage.event.house"><b>House: </b> {{result.bill.mostRecentStage.event.house.showAs}}</li>
+              <li *ngIf="result.bill.mostRecentStage.event.progressStage"><b>ProgressStage: </b> {{result.bill.mostRecentStage.event.progressStage}}</li>
+              <li *ngIf="result.bill.mostRecentStage.event.showAs"><b>Show As: </b> {{result.bill.mostRecentStage.event.showAs}}</li>
+              <li *ngIf="result.bill.mostRecentStage.event.stageCompleted"><b>Stage Completed: </b> {{result.bill.mostRecentStage.event.stageCompleted}}</li>
+              <li *ngIf="result.bill.mostRecentStage.event.stageOutcome"><b>Stage Outcome: </b> {{result.bill.mostRecentStage.event.stageOutcome}}</li>
+              <li *ngIf="result.bill.mostRecentStage.event.stageUri"><b>Stage Uri: </b> <a href="{{result.bill.mostRecentStage.event.stageUri}}">Click to view</a></li>
+              <li *ngIf="result.bill.mostRecentStage.event.uri"><b>Uri:: </b> <a href="{{result.bill.mostRecentStage.event.uri}}">Click to view</a></li>
+            </ul>
+          </div>
+
+          <div *ngIf="result.bill.originHouse">
+            <ion-item-divider><ion-label>Origin House</ion-label></ion-item-divider>
+            <p>{{result.bill.originHouse.showAs}}</p>
+          </div>
+
+          <div *ngIf="result.bill.relatedDocs.length">
+            <ion-item-divider><ion-label>Related Docs</ion-label></ion-item-divider>
+            <ul *ngFor="let rDoc of result.bill.relatedDocs">
+              <li><b>Date:     </b> {{rDoc.relatedDoc.date}} </li>
+              <li><b>Doc Type: </b> {{rDoc.relatedDoc.docType}} </li>
+              <li><b>Doc Url:  </b> <a href="{{rDoc.relatedDoc.formats.pdf.uri}}">Click to view</a></li>
+              <li><b>Language: </b> {{rDoc.relatedDoc.lang}} </li>
+              <li><b>Show As:  </b> {{rDoc.relatedDoc.showAs}} </li>
+              <li><b>Uri:      </b> <a href="{{rDoc.relatedDoc.uri}}">Click to view</a> </li>
+            </ul>
+          </div>
+
+          <div *ngIf="result.bill.source">
+            <ion-item-divider><ion-label>Source</ion-label></ion-item-divider>
+            <p>{{result.bill.source}}</p>
+          </div>
+
+          <div *ngIf="result.bill.sponsors.length">
+            <ion-item-divider><ion-label>Sponsors</ion-label></ion-item-divider>
+            <ul *ngFor="let sponsor of result.bill.sponsors">
+              <li><b>Sponsor:     </b> {{sponsor.sponsor.as.showAs}} </li>
+            </ul>
+          </div>
+
+          <div *ngIf="result.bill.stages.length">
+            <ion-item-divider><ion-label>Stages</ion-label></ion-item-divider>
+            <ul *ngFor="let stage of result.bill.stages">
+              <li><b>Chamber:     </b> {{stage.event.chamber.showAs}} </li>
+              <li><b>Dates:     </b> {{stage.event.dates[0].date}} </li>
+              <li><b>House:     </b> {{stage.event.house.showAs}} </li>
+              <li><b>Progress Stage:     </b> {{stage.event.showAs}} </li>
+              <li><b>Stage Completed:     </b> {{stage.event.stageCompleted}} </li>
+              <li><b>Stage Uri:     </b> <a href="{{stage.event.stageUri}}">Click to view</a> </li>
+              <li><b>Uri:     </b> <a href="{{stage.event.uri}}">Click to view</a> </li>
+            </ul>
+          </div>
+
+          <div *ngIf="result.bill.versions.length">
+            <ion-item-divider><ion-label>Versions</ion-label></ion-item-divider>
+            <ul *ngFor="let version of result.bill.versions">
+              <li><b>Date:     </b> {{version.version.date}} </li>
+              <li><b>Doc Type:     </b> {{version.version.docType}} </li>
+              <li><b>PDF Link:     </b> <a href="{{version.version.formats.pdf.uri}}">Click to view</a> </li>
+              <li><b>Language:     </b> {{version.version.lang}} </li>
+              <li><b>Desc:     </b> {{version.version.showAs}} </li>
+              <li><b>Uri:     </b> <a href="{{version.version.uri}}">Click to view</a> </li>
+            </ul>
+          </div>
+
+        </ion-card-content>
+      </div>
     </ion-card>
 </div>
 </ion-content>

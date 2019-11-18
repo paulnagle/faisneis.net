@@ -11,6 +11,7 @@ import { LoadingService } from '../service/loading.service';
 export class LegislationPage implements OnInit {
   results;
   myDate: string = new Date().toISOString();
+  shownCard;
 
   constructor(
     private legislationService: LegislationService,
@@ -29,11 +30,23 @@ export class LegislationPage implements OnInit {
       result: any;
     }
 
-    this.loadingCtrl.present("Loading...");
+    this.loadingCtrl.present('Loading...');
     this.legislationService.getAllLegislation(this.myDate.substr(0, 4)).subscribe((data) => {
       this.results = data;
       this.loadingCtrl.dismiss();
     });
+  }
+
+  toggleCard(card) {
+    if (this.isCardShown(card)) {
+      this.shownCard = null;
+    } else {
+      this.shownCard = card;
+    }
+  }
+
+  isCardShown(card) {
+    return this.shownCard === card;
   }
 
 }
