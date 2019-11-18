@@ -10,5 +10,45 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Filter by Year -></ion-label>
+    <ion-datetime displayFormat="MMM YYYY" [(ngModel)]="myDate" min="Jan 1922" max="Jan 2020" (ngModelChange)="getAllDebates()"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Chamber Type</ion-label>
+    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllDebates()">
+      <ion-select-option value="house">House</ion-select-option>
+      <ion-select-option value="committee">Committee</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Chamber</ion-label>
+    <ion-select [(ngModel)]="chamber" [selectedText]="chamber" (ngModelChange)="getAllDebates()">
+      <ion-select-option value="dail">Dail</ion-select-option>
+      <ion-select-option value="seanad">Seanad</ion-select-option>
+      <ion-select-option value="committee">committee</ion-select-option>
+    </ion-select>
+  </ion-item>
 
+  <div *ngIf="results" >
+    <ion-card *ngFor="let result of results.results; let i = index">
+      <ion-card-header (click)="toggleCard(i)">
+        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+
+        <ion-card-title [innerHTML]="result.debateRecord.chamber.showAs"></ion-card-title>
+        <ion-card-subtitle [innerHTML]="result.debateRecord.date"></ion-card-subtitle>
+      </ion-card-header>
+      <div *ngIf="isCardShown(i)">
+        <ion-card-content>
+
+          <!-- <div *ngIf="result.bill.longTitleEn">
+            <ion-item-divider><ion-label>Long Title</ion-label></ion-item-divider>
+            <p>{{result.bill.longTitleEn}}</p>
+          </div> -->
+
+
+        </ion-card-content>
+      </div>
+    </ion-card>
+</div>
 </ion-content>
