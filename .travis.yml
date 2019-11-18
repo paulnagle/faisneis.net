@@ -13,6 +13,7 @@ before_install:
   - npm i npm@^4 -g
 install:
   - npm install
+  - npm install -g cordova ionic
 script:
   - ./build.sh
 notifications:
