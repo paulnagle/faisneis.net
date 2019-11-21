@@ -12,8 +12,9 @@ export class DebatesPage implements OnInit {
   results;
   myDate: string = new Date().toISOString();
   chamberType = 'committee';
-  chamber = 'dail';
   shownCard;
+  minSelectableDate = '1922-01-01';
+  maxSelectableDate = '2020-01-30';
 
   constructor(
     private debatesService: DebatesService,
@@ -25,12 +26,14 @@ export class DebatesPage implements OnInit {
   }
 
   getAllDebates() {
-    console.log('Year = ', this.myDate.substr(0, 4));
+    const year = this.myDate.substr(0, 4);
+    const month = this.myDate.substr(5, 2);
 
     this.loadingCtrl.present('Loading...');
-    this.debatesService.getAllDebates(this.myDate.substr(0, 4), this.chamber, this.chamberType).subscribe((data) => {
+    this.debatesService.getAllDebates(year, month, this.chamberType).subscribe((data) => {
       this.results = data;
       this.loadingCtrl.dismiss();
+      console.log(data);
     });
   }
 

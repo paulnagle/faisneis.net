@@ -11,8 +11,8 @@
 
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-label>FIlter by Year -></ion-label>
-    <ion-datetime displayFormat="YYYY" [(ngModel)]="myDate" min="1901" max="2020" (ngModelChange)="getAllLegislation()"></ion-datetime>
+    <ion-label>Filter by Year -></ion-label>
+    <ion-datetime displayFormat="YYYY" [(ngModel)]="myDate" min="1922" max="2020" (ngModelChange)="getAllLegislation()"></ion-datetime>
   </ion-item>
   <div *ngIf="results" >
     <ion-card *ngFor="let result of results.results; let i = index">

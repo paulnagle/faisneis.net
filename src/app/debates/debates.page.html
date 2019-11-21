@@ -12,21 +12,21 @@
 <ion-content>
   <ion-item>
     <ion-label>Filter by Year -></ion-label>
-    <ion-datetime displayFormat="MMM YYYY" [(ngModel)]="myDate" min="Jan 1922" max="Jan 2020" (ngModelChange)="getAllDebates()"></ion-datetime>
+    <ion-datetime
+      displayFormat="MMM YYYY"
+      [(ngModel)]="myDate"
+      min="{{minSelectableDate}}"
+      max="{{maxSelectableDate}}"
+      (ngModelChange)="getAllDebates()">
+    </ion-datetime>
   </ion-item>
-  <ion-item>
-    <ion-label>Chamber Type</ion-label>
-    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllDebates()">
-      <ion-select-option value="house">House</ion-select-option>
-      <ion-select-option value="committee">Committee</ion-select-option>
-    </ion-select>
-  </ion-item>
+
   <ion-item>
     <ion-label>Chamber</ion-label>
-    <ion-select [(ngModel)]="chamber" [selectedText]="chamber" (ngModelChange)="getAllDebates()">
+    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllDebates()">
       <ion-select-option value="dail">Dail</ion-select-option>
       <ion-select-option value="seanad">Seanad</ion-select-option>
-      <ion-select-option value="committee">committee</ion-select-option>
+      <ion-select-option value="committee">Committee</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -41,10 +41,55 @@
       <div *ngIf="isCardShown(i)">
         <ion-card-content>
 
-          <!-- <div *ngIf="result.bill.longTitleEn">
-            <ion-item-divider><ion-label>Long Title</ion-label></ion-item-divider>
-            <p>{{result.bill.longTitleEn}}</p>
-          </div> -->
+          <ion-item-divider *ngIf="result.debateRecord.debateType"><ion-label>Debate Type</ion-label></ion-item-divider>
+          <ul>
+            <li *ngIf="result.debateRecord.debateType"><b>Debate Type: </b> {{result.debateRecord.debateType}} </li>
+          </ul>
+
+          <ion-item-divider><ion-label>Counts</ion-label></ion-item-divider>
+          <ul>
+            <li *ngIf="result.debateRecord.counts.billCount"><b>Bill Count: </b> {{result.debateRecord.counts.billCount}} </li>
+            <li *ngIf="result.debateRecord.counts.contributorCount"><b>Contributor Count: </b> {{result.debateRecord.counts.contributorCount}} </li>
+            <li *ngIf="result.debateRecord.counts.debateSectionCount"><b>Debate Section Count: </b> {{result.debateRecord.counts.debateSectionCount}} </li>
+            <li *ngIf="result.debateRecord.counts.divisionCount"><b>Division Count: </b> {{result.debateRecord.counts.divisionCount}} </li>
+            <li *ngIf="result.debateRecord.counts.questionCount"><b>Question Count: </b> {{result.debateRecord.counts.questionCount}} </li>
+          </ul>
+
+
+          <div *ngIf="result.debateRecord.formats.pdf">
+            <div *ngIf="result.debateRecord.formats.pdf.uri">
+              <ion-item-divider><ion-label>PDF of debate</ion-label></ion-item-divider>
+                <ul>
+                  <li><a href="{{result.debateRecord.formats.pdf.uri}}">Click to view</a></li>
+                </ul>
+            </div>
+          </div>
+
+
+          <div *ngIf="result.debateRecord.debateSections">
+            <div *ngIf="result.debateRecord.debateSections.length">
+              <ion-item-divider><ion-label>Debate Sections</ion-label></ion-item-divider>
+              <ul *ngFor="let debateSection of result.debateRecord.debateSections;  let i = index">
+                <div *ngIf="result.debateRecord.debateSections[i].debateSection.bill">
+                  <div *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event">
+                    <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.houseCode"><b>Bill: House Code : </b> {{debateSection.debateSection.bill.event.houseCode}} </li>
+                    <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.isBillStage"><b>Bill: Is Bill Stage? : </b> {{debateSection.debateSection.bill.event.isBillStage}} </li>
+                    <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.showAs"><b>Bill: Show As : </b> {{debateSection.debateSection.bill.event.showAs}} </li>
+                    <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.stage"><b>Bill: Stage : </b> {{debateSection.debateSection.bill.event.stage}} </li>
+                    <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.uri"><b>Bill: Link : </b> {{debateSection.debateSection.bill.event.uri}} </li>
+                  </div>
+                </div>
+                <li *ngIf="result.debateRecord.debateSections[i].debateSection.showAs"><b>Show As: </b> {{debateSection.debateSection.showAs}} </li>
+                <li *ngIf="result.debateRecord.debateSections[i].debateSection.counts.speakerCount"><b>Speaker Count: </b> {{debateSection.debateSection.counts.speakerCount}} </li>
+                <li *ngIf="result.debateRecord.debateSections[i].debateSection.counts.speechCount"><b>Speech Count: </b> {{debateSection.debateSection.counts.speechCount}} </li>
+                <li *ngIf="result.debateRecord.debateSections[i].debateSection.debateType"><b>Debate Type: </b> {{debateSection.debateSection.debateType}} </li>
+
+                <li *ngIf="result.debateRecord.debateSections[i].debateSection.formats.pdf"><b>PDF Format: </b> {{debateSection.debateSection.formats.pdf.uri}} </li>
+                <li *ngIf="result.debateRecord.debateSections[i].debateSection.formats.xml"><b>XML Format: </b> {{debateSection.debateSection.formats.xml.uri}} </li>
+
+              </ul>
+            </div>
+          </div>
 
 
         </ion-card-content>
