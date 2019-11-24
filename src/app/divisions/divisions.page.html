@@ -45,6 +45,8 @@
           <p><b>Date : </b>{{result.division.date}}</p>
           <p><b>Subject : </b>{{result.division.subject.showAs}}</p>
           <p><b>Date : </b>{{result.division.date}}</p>
+          <p><b>Tellers : </b>{{result.division.tellers}}</p>
+
           <p><b>Níl votes : </b>{{result.division.tallies.nilVotes.tally}}</p>
           <ul *ngFor="let member of result.division.tallies.nilVotes.members">
             <li>{{member.member.showAs}}</li>

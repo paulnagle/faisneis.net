@@ -10,7 +10,7 @@ import { LoadingService } from '../service/loading.service';
 export class DivisionsPage implements OnInit {
   results;
   myDate: string = new Date().toISOString();
-  chamberType = 'committee';
+  chamberType = 'dail';
   shownCard;
   minSelectableDate = '1922-01-01';
   maxSelectableDate = '2020-01-30';
