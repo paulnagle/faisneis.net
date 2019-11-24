@@ -8,6 +8,55 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
 
+<ion-content>
+  <ion-item>
+    <ion-label>Filter by Month -></ion-label>
+    <ion-datetime
+      displayFormat="MMM YYYY"
+      [(ngModel)]="myDate"
+      min="{{minSelectableDate}}"
+      max="{{maxSelectableDate}}"
+      (ngModelChange)="getAllDivisions()">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Chamber</ion-label>
+    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllDivisions()">
+      <ion-select-option value="dail">Dail</ion-select-option>
+      <ion-select-option value="seanad">Seanad</ion-select-option>
+      <ion-select-option value="committee">Committee</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="results" >
+    <ion-card *ngFor="let result of results.results; let i = index">
+      <ion-card-header (click)="toggleCard(i)">
+        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-card-title [innerHTML]="result.division.debate.showAs"></ion-card-title>
+        <ion-card-subtitle [innerHTML]="result.division.contextDate"></ion-card-subtitle>
+      </ion-card-header>
+      <div *ngIf="isCardShown(i)">
+        <ion-card-content>
+          <p><b>Outcome: </b>{{result.division.outcome}}</p>
+          <p><b>Category : </b>{{result.division.category}}</p>
+          <p><b>Chamber : </b>{{result.division.chamber.showAs}}</p>
+          <p><b>Date : </b>{{result.division.date}}</p>
+          <p><b>Subject : </b>{{result.division.subject.showAs}}</p>
+          <p><b>Date : </b>{{result.division.date}}</p>
+          <p><b>Níl votes : </b>{{result.division.tallies.nilVotes.tally}}</p>
+          <ul *ngFor="let member of result.division.tallies.nilVotes.members">
+            <li>{{member.member.showAs}}</li>
+          </ul>
+          <p><b>Tá votes : </b>{{result.division.tallies.taVotes.tally}}</p>
+          <ul *ngFor="let member of result.division.tallies.taVotes.members">
+            <li>{{member.member.showAs}}</li>
+          </ul>
+
+
+        </ion-card-content>
+      </div>
+    </ion-card>
+</div>
 </ion-content>

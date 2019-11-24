@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DivisionsService } from '../service/divisions.service';
+import { LoadingService } from '../service/loading.service';
 
 @Component({
   selector: 'app-divisions',
@@ -6,10 +8,46 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./divisions.page.scss'],
 })
 export class DivisionsPage implements OnInit {
+  results;
+  myDate: string = new Date().toISOString();
+  chamberType = 'committee';
+  shownCard;
+  minSelectableDate = '1922-01-01';
+  maxSelectableDate = '2020-01-30';
 
-  constructor() { }
+  constructor(
+    private deivisionsService: DivisionsService,
+    public loadingCtrl: LoadingService
+  ) { }
 
   ngOnInit() {
+    this.getAllDivisions();
   }
+
+  getAllDivisions() {
+    const year = this.myDate.substr(0, 4);
+    const month = this.myDate.substr(5, 2);
+
+    this.loadingCtrl.present('Loading...');
+    this.deivisionsService.getAllDivisions(year, month, this.chamberType).subscribe((data) => {
+      this.results = data;
+      this.loadingCtrl.dismiss();
+      console.log(data);
+    });
+  }
+
+
+  toggleCard(card) {
+    if (this.isCardShown(card)) {
+      this.shownCard = null;
+    } else {
+      this.shownCard = card;
+    }
+  }
+
+  isCardShown(card) {
+    return this.shownCard === card;
+  }
+
 
 }
