@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { PartiesService } from '../service/parties.service';
+import { LoadingService } from '../service/loading.service';
 @Component({
   selector: 'app-parties',
   templateUrl: './parties.page.html',
@@ -7,9 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PartiesPage implements OnInit {
 
-  constructor() { }
+  results;
+  chamberType = 'dail';
+  houseNo = '32';
+  shownCard;
+
+  constructor(
+    private partiesService: PartiesService,
+    public loadingCtrl: LoadingService) { }
 
   ngOnInit() {
+    this.getAllParties();
+  }
+
+  getAllParties() {
+
+    this.loadingCtrl.present('Loading...');
+    this.partiesService.getAllParties(this.chamberType, this.houseNo).subscribe((data) => {
+      this.results = data;
+      this.loadingCtrl.dismiss();
+      console.log(data);
+    });
+  }
+
+  toggleCard(card) {
+    if (this.isCardShown(card)) {
+      this.shownCard = null;
+    } else {
+      this.shownCard = card;
+    }
+  }
+
+  isCardShown(card) {
+    return this.shownCard === card;
   }
 
 }

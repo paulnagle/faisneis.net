@@ -11,4 +11,42 @@
 
 <ion-content>
 
+  <ion-item>
+    <ion-label>Chamber</ion-label>
+    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllParties()">
+      <ion-select-option value="dail">Dail</ion-select-option>
+      <ion-select-option value="seanad">Seanad</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+        <ion-label>House No</ion-label>
+    <ion-range [(ngModel)]="houseNo" min="1" max="32" snaps=true ticks=true pin=true  deBounce=500 (ngModelChange)="getAllParties()">
+      <ion-label slot="start">1</ion-label>
+      <ion-label slot="end">32</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <div *ngIf="results" >
+
+    <ion-card>
+      <ion-card-header>
+        <div *ngIf="results.results">
+          <ion-card-title [innerHTML]="results.results.house.house.showAs"></ion-card-title>
+        </div>
+      </ion-card-header>
+      <ion-card-content>
+
+        <div *ngIf="results.results">
+          <div *ngIf="results.results.house.parties.length">
+            <ion-item-divider><ion-label>Parties</ion-label></ion-item-divider>
+            <ul *ngFor="let party of results.results.house.parties;  let i = index">
+              <li><b>Name : </b> {{party.party.showAs}} </li>
+            </ul>
+          </div>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
