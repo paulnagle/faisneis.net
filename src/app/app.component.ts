@@ -24,32 +24,32 @@ export class AppComponent {
     {
       title: 'Debates',
       url: '/debates',
-      icon: 'paper'
+      icon: 'done-all'
     },
     {
       title: 'Constituencies',
       url: '/constituencies',
-      icon: 'paper'
+      icon: 'pin'
     },
     {
       title: 'Divisions',
       url: '/divisions',
-      icon: 'paper'
+      icon: 'checkbox-outline'
     },
     {
       title: 'Members',
       url: '/members',
-      icon: 'paper'
+      icon: 'person'
     },
     {
       title: 'Parties',
       url: '/parties',
-      icon: 'paper'
+      icon: 'people'
     },
     {
       title: 'Questions',
       url: '/questions',
-      icon: 'paper'
+      icon: 'help'
     }
   ];
 

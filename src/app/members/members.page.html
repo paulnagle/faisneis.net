@@ -8,6 +8,56 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
+
+  <ion-item>
+    <ion-label>Chamber</ion-label>
+    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllMembers()">
+      <ion-select-option value="dail">Dail</ion-select-option>
+      <ion-select-option value="seanad">Seanad</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+        <ion-label>House No</ion-label>
+    <ion-range [(ngModel)]="houseNo" min="1" max="32" snaps=true ticks=true pin=true  deBounce=500 (ngModelChange)="getAllMembers()">
+      <ion-label slot="start">1</ion-label>
+      <ion-label slot="end">32</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <div *ngIf="results" >
+    <ion-card *ngFor="let result of results.results; let i = index">
+      <ion-card-header (click)="toggleCard(i)">
+        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+
+        <ion-card-title [innerHTML]="result.member.fullName"></ion-card-title>
+      </ion-card-header>
+      <div *ngIf="isCardShown(i)">
+        <ion-card-content>
+
+          <div *ngIf="result.member.memberships.length">
+            <ion-item-divider><ion-label>Memberships</ion-label></ion-item-divider>
+            <ul *ngFor="let membership of result.member.memberships">
+              <div *ngFor="let represent of membership.membership.represents">
+                <li><b>{{represent.represent.representType}}: </b> {{represent.represent.showAs}} </li>
+              </div>
+              <li><b>From: </b> {{membership.membership.dateRange.start}} </li>
+              <li><b>To: </b> {{membership.membership.dateRange.end}} </li>
+              <li><b>House: </b> {{membership.membership.house.showAs}}</li>
+              <div *ngFor="let party of membership.membership.parties">
+                <li><b>Party: </b> {{party.party.showAs}}   ({{party.party.dateRange.start}} - {{party.party.dateRange.end}})</li>
+              </div>
+              <div *ngFor="let office of membership.membership.offices">
+                <li><b>Office: </b> {{office.office.officeName.showAs}}   ({{office.office.dateRange.start}} - {{office.office.dateRange.end}})</li>
+              </div>
+            </ul>
+          </div>
+
+        </ion-card-content>
+      </div>
+    </ion-card>
+</div>
 
 </ion-content>
