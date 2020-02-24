@@ -10,7 +10,7 @@ export class PartiesPage implements OnInit {
 
   results;
   chamberType = 'dail';
-  houseNo = '32';
+  houseNo = '33';
   shownCard;
 
   constructor(

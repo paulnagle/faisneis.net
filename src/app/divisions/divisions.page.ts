@@ -16,7 +16,7 @@ export class DivisionsPage implements OnInit {
   maxSelectableDate = '2020-01-30';
 
   constructor(
-    private deivisionsService: DivisionsService,
+    private divisionsService: DivisionsService,
     public loadingCtrl: LoadingService
   ) { }
 
@@ -29,7 +29,7 @@ export class DivisionsPage implements OnInit {
     const month = this.myDate.substr(5, 2);
 
     this.loadingCtrl.present('Loading...');
-    this.deivisionsService.getAllDivisions(year, month, this.chamberType).subscribe((data) => {
+    this.divisionsService.getAllDivisions(year, month, this.chamberType).subscribe((data) => {
       this.results = data;
       this.loadingCtrl.dismiss();
       console.log(data);

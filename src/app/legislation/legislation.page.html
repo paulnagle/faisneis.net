@@ -17,7 +17,7 @@
   <div *ngIf="results" >
     <ion-card *ngFor="let result of results.results; let i = index">
       <ion-card-header (click)="toggleCard(i)">
-        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
 
         <ion-card-title [innerHTML]="result.bill.shortTitleEn"></ion-card-title>
         <ion-card-subtitle [innerHTML]="result.bill.shortTitleEn"></ion-card-subtitle>
@@ -59,7 +59,7 @@
               <li><b>Date: </b> {{debate.date}} </li>
               <li><b>Debate Section Id: </b> {{debate.debateSectionId}}</li>
               <li><b>Show As: </b> {{debate.showAs}}</li>
-              <li><b>Link: </b> <a href="{{debate.uri}}">Click to view</a></li>
+              <!-- <li><b>Link: </b> <a href="{{debate.uri}}">Click to view</a></li> -->
             </ul>
           </div>
 
@@ -75,8 +75,8 @@
                 <li *ngIf="result.bill.events[i].event.showAs"><b>Show As: </b> {{event.event.showAs}}</li>
                 <li *ngIf="result.bill.events[i].event.stageCompleted"><b>Stage Completed: </b> {{event.event.stageCompleted}}</li>
                 <li *ngIf="result.bill.events[i].event.stageOutcome"><b>Stage Outcome: </b> {{event.event.stageOutcome}}</li>
-                <li *ngIf="result.bill.events[i].event.stageUri"><b>Stage Uri: </b> <a href="{{event.event.stageUri}}">Click to view</a></li>
-                <li *ngIf="result.bill.events[i].event.uri"><b>Uri: </b> <a href="{{event.event.uri}}">Click to view</a></li>
+                <!-- <li *ngIf="result.bill.events[i].event.stageUri"><b>Stage Uri: </b> <a href="{{event.event.stageUri}}">Click to view</a></li> -->
+                <!-- <li *ngIf="result.bill.events[i].event.uri"><b>Uri: </b> <a href="{{event.event.uri}}">Click to view</a></li> -->
               </ul>
             </div>
           </div>
@@ -97,7 +97,7 @@
               <li *ngIf="result.bill.mostRecentStage.event.stageCompleted"><b>Stage Completed: </b> {{result.bill.mostRecentStage.event.stageCompleted}}</li>
               <li *ngIf="result.bill.mostRecentStage.event.stageOutcome"><b>Stage Outcome: </b> {{result.bill.mostRecentStage.event.stageOutcome}}</li>
               <li *ngIf="result.bill.mostRecentStage.event.stageUri"><b>Stage Uri: </b> <a href="{{result.bill.mostRecentStage.event.stageUri}}">Click to view</a></li>
-              <li *ngIf="result.bill.mostRecentStage.event.uri"><b>Uri:: </b> <a href="{{result.bill.mostRecentStage.event.uri}}">Click to view</a></li>
+              <!-- <li *ngIf="result.bill.mostRecentStage.event.uri"><b>Uri:: </b> <a href="{{result.bill.mostRecentStage.event.uri}}">Click to view</a></li> -->
             </ul>
           </div>
 
@@ -114,7 +114,7 @@
               <li><b>Doc Url:  </b> <a href="{{rDoc.relatedDoc.formats.pdf.uri}}">Click to view</a></li>
               <li><b>Language: </b> {{rDoc.relatedDoc.lang}} </li>
               <li><b>Show As:  </b> {{rDoc.relatedDoc.showAs}} </li>
-              <li><b>Uri:      </b> <a href="{{rDoc.relatedDoc.uri}}">Click to view</a> </li>
+              <!-- <li><b>Uri:      </b> <a href="{{rDoc.relatedDoc.uri}}">Click to view</a> </li> -->
             </ul>
           </div>
 
@@ -138,8 +138,8 @@
               <li><b>House:     </b> {{stage.event.house.showAs}} </li>
               <li><b>Progress Stage:     </b> {{stage.event.showAs}} </li>
               <li><b>Stage Completed:     </b> {{stage.event.stageCompleted}} </li>
-              <li><b>Stage Uri:     </b> <a href="{{stage.event.stageUri}}">Click to view</a> </li>
-              <li><b>Uri:     </b> <a href="{{stage.event.uri}}">Click to view</a> </li>
+              <!-- <li><b>Stage Uri:     </b> <a href="{{stage.event.stageUri}}">Click to view</a> </li> -->
+              <!-- <li><b>Uri:     </b> <a href="{{stage.event.uri}}">Click to view</a> </li> -->
             </ul>
           </div>
 
@@ -151,7 +151,7 @@
               <li><b>PDF Link:     </b> <a href="{{version.version.formats.pdf.uri}}">Click to view</a> </li>
               <li><b>Language:     </b> {{version.version.lang}} </li>
               <li><b>Desc:     </b> {{version.version.showAs}} </li>
-              <li><b>Uri:     </b> <a href="{{version.version.uri}}">Click to view</a> </li>
+              <!-- <li><b>Uri:     </b> <a href="{{version.version.uri}}">Click to view</a> </li> -->
             </ul>
           </div>
 

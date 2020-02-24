@@ -33,7 +33,7 @@
   <div *ngIf="results" >
     <ion-card *ngFor="let result of results.results; let i = index">
       <ion-card-header (click)="toggleCard(i)">
-        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
 
         <ion-card-title [innerHTML]="result.debateRecord.chamber.showAs"></ion-card-title>
         <ion-card-subtitle [innerHTML]="result.debateRecord.date"></ion-card-subtitle>
@@ -76,7 +76,7 @@
                     <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.isBillStage"><b>Bill: Is Bill Stage? : </b> {{debateSection.debateSection.bill.event.isBillStage}} </li>
                     <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.showAs"><b>Bill: Show As : </b> {{debateSection.debateSection.bill.event.showAs}} </li>
                     <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.stage"><b>Bill: Stage : </b> {{debateSection.debateSection.bill.event.stage}} </li>
-                    <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.uri"><b>Bill: Link : </b> {{debateSection.debateSection.bill.event.uri}} </li>
+                    <!-- <li *ngIf="result.debateRecord.debateSections[i].debateSection.bill.event.uri"><b>Bill: Link : </b> {{debateSection.debateSection.bill.event.uri}} </li> -->
                   </div>
                 </div>
                 <li *ngIf="result.debateRecord.debateSections[i].debateSection.showAs"><b>Show As: </b> {{debateSection.debateSection.showAs}} </li>
@@ -84,8 +84,8 @@
                 <li *ngIf="result.debateRecord.debateSections[i].debateSection.counts.speechCount"><b>Speech Count: </b> {{debateSection.debateSection.counts.speechCount}} </li>
                 <li *ngIf="result.debateRecord.debateSections[i].debateSection.debateType"><b>Debate Type: </b> {{debateSection.debateSection.debateType}} </li>
 
-                <li *ngIf="result.debateRecord.debateSections[i].debateSection.formats.pdf"><b>PDF Format: </b> {{debateSection.debateSection.formats.pdf.uri}} </li>
-                <li *ngIf="result.debateRecord.debateSections[i].debateSection.formats.xml"><b>XML Format: </b> {{debateSection.debateSection.formats.xml.uri}} </li>
+                <!-- <li *ngIf="result.debateRecord.debateSections[i].debateSection.formats.pdf"><b>PDF Format: </b> {{debateSection.debateSection.formats.pdf.uri}} </li> -->
+                <!-- <li *ngIf="result.debateRecord.debateSections[i].debateSection.formats.xml"><b>XML Format: </b> {{debateSection.debateSection.formats.xml.uri}} </li> -->
 
               </ul>
             </div>
@@ -96,4 +96,5 @@
       </div>
     </ion-card>
 </div>
+
 </ion-content>

@@ -21,9 +21,9 @@
 
   <ion-item>
         <ion-label>House No</ion-label>
-    <ion-range [(ngModel)]="houseNo" min="1" max="32" snaps=true ticks=true pin=true  deBounce=500 (ngModelChange)="getAllConstituencies()">
+    <ion-range [(ngModel)]="houseNo" min="1" max="33" snaps=true ticks=true pin=true  deBounce=500 (ngModelChange)="getAllConstituencies()">
       <ion-label slot="start">1</ion-label>
-      <ion-label slot="end">32</ion-label>
+      <ion-label slot="end">33</ion-label>
     </ion-range>
   </ion-item>
 
@@ -41,8 +41,7 @@
           <div *ngIf="results.results.house.constituenciesOrPanels.length">
             <ion-item-divider><ion-label>Constituencies/Panels</ion-label></ion-item-divider>
             <ul *ngFor="let constituenciesOrPanel of results.results.house.constituenciesOrPanels;  let i = index">
-              <li><b>Type : </b> {{constituenciesOrPanel.constituencyOrPanel.representType}} </li>
-              <li><b>Name : </b> {{constituenciesOrPanel.constituencyOrPanel.showAs}} </li>
+              <li>{{constituenciesOrPanel.constituencyOrPanel.showAs}} &nbsp;(<i>{{constituenciesOrPanel.constituencyOrPanel.representType}}</i>)</li>
             </ul>
           </div>
         </div>
@@ -50,4 +49,10 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <ion-item>
+    <ion-label>
+      N.B.
+    </ion-label>
+    There have been 33 Dails and 25 Seanads.
+  </ion-item>
 </ion-content>

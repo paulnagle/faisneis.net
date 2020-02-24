@@ -33,7 +33,7 @@
   <div *ngIf="results" >
     <ion-card *ngFor="let result of results.results; let i = index">
       <ion-card-header (click)="toggleCard(i)">
-        <ion-icon color="dark" style="float: right;" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
         <ion-card-title [innerHTML]="result.division.debate.showAs"></ion-card-title>
         <ion-card-subtitle [innerHTML]="result.division.contextDate"></ion-card-subtitle>
       </ion-card-header>
@@ -61,4 +61,5 @@
       </div>
     </ion-card>
 </div>
+
 </ion-content>

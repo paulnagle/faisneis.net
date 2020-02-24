@@ -10,7 +10,7 @@ export class MembersPage implements OnInit {
 
   results;
   chamberType = 'dail';
-  houseNo = '32';
+  houseNo = '33';
   shownCard;
 
   constructor(

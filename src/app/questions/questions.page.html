@@ -4,11 +4,67 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Questions
+      <span *ngIf="results" >{{ results.head.counts.questionCount}}&nbsp;</span>Questions
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Filter by Day -></ion-label>
+    <ion-datetime
+      displayFormat="DD MMM YYYY"
+      [(ngModel)]="myDate"
+      min="{{minSelectableDate}}"
+      max="{{maxSelectableDate}}"
+      (ngModelChange)="getAllQuestions()">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Question Type</ion-label>
+    <ion-select [(ngModel)]="questionType" [selectedText]="questionType" (ngModelChange)="getAllQuestions()">
+      <ion-select-option value="written">Written</ion-select-option>
+      <ion-select-option value="oral">Oral</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="results" >
+    <ion-card *ngFor="let result of results.results; let i = index">
+      <ion-card-header (click)="toggleCard(i)">
+        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-card-title [innerHTML]="result.question.showAs"></ion-card-title>
+       <!-- <ion-card-subtitle [innerHTML]="result.question[0]"></ion-card-subtitle> -->
+      </ion-card-header>
+
+      <div *ngIf="isCardShown(i)">
+        <ion-card-content>
+          <p><b>Date: </b>{{result.question.date}}</p>
+          <p><b>Section : </b>{{result.question.debateSection.showAs}}</p>
+          <p><b>Asked By : </b>{{result.question.by.showAs}}</p>
+          <p><b>Asked To : </b>{{result.question.to.showAs}}</p>
+          <p><b>Question Number : </b>{{result.question.questionNumber}}</p>
+          <p><b>House : </b>{{result.question.house.showAs}}</p>
+          <p><b>Type : </b>{{result.question.questionType}}</p>
+          <ion-button (click)="getXMLAnswer(result.question.debateSection.formats.xml.uri)">Reveal Answer</ion-button>
+
+          <div *ngIf="XMLAnswerResult">
+            <div>
+              <div *ngFor="let para of XMLAnswerResult.AKOMANTOSO.DEBATE[0].DEBATEBODY[0].DEBATESECTION[0].SPEECH">
+                <p><b>From:&nbsp;</b></p>
+                <p>{{ para.FROM[0]._ }} </p>
+                <p><b>Text:&nbsp;</b></p>
+                <div *ngFor="let text of para.P">
+                  <p>{{ text._ }}</p>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div> 
+        </ion-card-content>
+      </div>
+
+    </ion-card>
+  </div>
 
 </ion-content>
