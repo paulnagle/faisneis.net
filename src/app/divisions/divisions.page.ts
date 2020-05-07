@@ -13,7 +13,7 @@ export class DivisionsPage implements OnInit {
   chamberType = 'dail';
   shownCard;
   minSelectableDate = '1922-01-01';
-  maxSelectableDate = '2020-01-30';
+  maxSelectableDate = '2020-05-30';
 
   constructor(
     private divisionsService: DivisionsService,

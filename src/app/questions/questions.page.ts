@@ -15,7 +15,7 @@ export class QuestionsPage implements OnInit {
   questionType = 'written';
   shownCard;
   minSelectableDate = '1922-01-01';
-  maxSelectableDate = '2020-01-30';
+  maxSelectableDate = '2020-05-30';
   XMLAnswerResult: any;
 
   constructor(
