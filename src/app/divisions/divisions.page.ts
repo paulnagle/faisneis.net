@@ -13,7 +13,7 @@ export class DivisionsPage implements OnInit {
   chamberType = 'dail';
   shownCard;
   minSelectableDate = '1922-01-01';
-  maxSelectableDate = '2020-05-30';
+  maxSelectableDate;
 
   constructor(
     private divisionsService: DivisionsService,
@@ -21,8 +21,26 @@ export class DivisionsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.maxSelectableDate = this.getToday();
     this.getAllDivisions();
   }
+
+  getToday() {
+    let d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+  }
+
 
   getAllDivisions() {
     const year = this.myDate.substr(0, 4);
