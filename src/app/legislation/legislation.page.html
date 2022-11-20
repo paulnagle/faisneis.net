@@ -10,14 +10,37 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+<!-- 
   <ion-item>
     <ion-label>Filter by Year -></ion-label>
-    <ion-datetime displayFormat="YYYY" [(ngModel)]="myDate" min="1922" max="2020" (ngModelChange)="getAllLegislation()"></ion-datetime>
+    <ion-datetime presentation="year" [(ngModel)]="myDate" min="1922" max="2022" (ngModelChange)="getAllLegislation()"></ion-datetime>
+  </ion-item> -->
+
+
+  <ion-item>
+    <ion-label>Pick a year <ion-icon name="arrow-forward-outline"></ion-icon></ion-label>
+    <ion-input
+      value="{{ myDate | date: 'yyyy' }}"
+      id="date"
+      class="ion-text-end"
+    ></ion-input>
+    <ion-popover trigger="date" size="auto" animated="true" backdrop-dismiss="true" dismiss-on-select="true">
+      <ng-template>
+        <ion-datetime
+          presentation="year"
+          [(ngModel)]="myDate"
+          (ngModelChange)="getAllLegislation()"
+          doneText="Done"
+        ></ion-datetime>
+      </ng-template>
+    </ion-popover>
   </ion-item>
+
   <div *ngIf="results" >
     <ion-card *ngFor="let result of results.results; let i = index">
       <ion-card-header (click)="toggleCard(i)">
-        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-down-circle-outline' : 'arrow-forward-circle-outline'"></ion-icon>
 
         <ion-card-title [innerHTML]="result.bill.shortTitleEn"></ion-card-title>
         <ion-card-subtitle [innerHTML]="result.bill.shortTitleEn"></ion-card-subtitle>

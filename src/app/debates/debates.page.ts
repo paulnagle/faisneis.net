@@ -14,7 +14,7 @@ export class DebatesPage implements OnInit {
   chamberType = 'dail';
   shownCard;
   minSelectableDate = '1922-01-01';
-  maxSelectableDate = '2020-05-30';
+  maxSelectableDate = new Date().toISOString().split('T')[0];
 
   constructor(
     private debatesService: DebatesService,
@@ -36,7 +36,6 @@ export class DebatesPage implements OnInit {
       console.log(data);
     });
   }
-
 
   toggleCard(card) {
     if (this.isCardShown(card)) {

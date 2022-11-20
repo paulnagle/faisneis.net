@@ -9,20 +9,32 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+
   <ion-item>
-    <ion-label>Filter by Month -></ion-label>
-    <ion-datetime
-      displayFormat="MMM YYYY"
-      [(ngModel)]="myDate"
-      min="{{minSelectableDate}}"
-      max="{{maxSelectableDate}}"
-      (ngModelChange)="getAllDivisions()">
-    </ion-datetime>
+    <ion-label>Pick a month <ion-icon name="arrow-forward-outline"></ion-icon></ion-label>
+    <ion-input
+      value="{{ myDate | date: 'MMM-yyyy' }}"
+      id="myDateInput"
+      class="ion-text-end"
+    ></ion-input>
+    <ion-popover trigger="myDateInput" size="auto" animated="true" backdrop-dismiss="true" dismiss-on-select="false">
+      <ng-template>
+        <ion-datetime 
+          presentation="month-year" 
+          [(ngModel)]="myDate" 
+          min="{{minSelectableDate}}"
+          max="{{maxSelectableDate}}"
+          (ngModelChange)="getAllDivisions()" 
+          doneText="Done">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
   </ion-item>
 
   <ion-item>
-    <ion-label>Chamber</ion-label>
+    <ion-label>Pick a Chamber <ion-icon name="arrow-forward-outline"></ion-icon></ion-label>
     <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllDivisions()">
       <ion-select-option value="dail">Dail</ion-select-option>
       <ion-select-option value="seanad">Seanad</ion-select-option>
@@ -33,7 +45,7 @@
   <div *ngIf="results" >
     <ion-card *ngFor="let result of results.results; let i = index">
       <ion-card-header (click)="toggleCard(i)">
-        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-dropdown-circle' : 'arrow-dropright-circle'"></ion-icon>
+        <ion-icon color="dark" style="float: right;" size="large" [name]="isCardShown(i) ? 'arrow-down-circle-outline' : 'arrow-forward-circle-outline'"></ion-icon>
         <ion-card-title [innerHTML]="result.division.debate.showAs"></ion-card-title>
         <ion-card-subtitle [innerHTML]="result.division.contextDate"></ion-card-subtitle>
       </ion-card-header>

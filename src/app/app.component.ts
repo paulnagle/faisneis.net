@@ -14,22 +14,22 @@ export class AppComponent {
     {
       title: 'Home',
       url: '/home',
-      icon: 'home'
+      icon: 'home-outline'
     },
     {
       title: 'Legislation',
       url: '/legislation',
-      icon: 'paper'
+      icon: 'newspaper-outline'
     },
     {
       title: 'Debates',
       url: '/debates',
-      icon: 'done-all'
+      icon: 'mic-outline'
     },
     {
       title: 'Constituencies',
       url: '/constituencies',
-      icon: 'pin'
+      icon: 'map-outline'
     },
     {
       title: 'Divisions',
@@ -39,16 +39,16 @@ export class AppComponent {
     {
       title: 'Members',
       url: '/members',
-      icon: 'person'
+      icon: 'person-outline'
     },
     {
       title: 'Parties',
       url: '/parties',
-      icon: 'people'
+      icon: 'people-outline'
     },
     {
       title: 'Questions',
-      url: '/questions',
+      url: '/questions-outline',
       icon: 'help'
     }
   ];

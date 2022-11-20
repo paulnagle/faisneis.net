@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { LegislationService } from '../service/legislation.service';
 import { LoadingService } from '../service/loading.service';
+
 
 @Component({
   selector: 'app-legislation',
@@ -9,6 +10,9 @@ import { LoadingService } from '../service/loading.service';
 })
 
 export class LegislationPage implements OnInit {
+  
+
+  
   results;
   myDate: string = new Date().toISOString();
   shownCard;
