@@ -13,7 +13,7 @@
 
   <ion-item>
     <ion-label>Chamber</ion-label>
-    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" (ngModelChange)="getAllConstituencies()">
+    <ion-select [(ngModel)]="chamberType" [selectedText]="chamberType" deBounce=500 (ngModelChange)="getAllConstituencies()">
       <ion-select-option value="dail">Dail</ion-select-option>
       <ion-select-option value="seanad">Seanad</ion-select-option>
     </ion-select>

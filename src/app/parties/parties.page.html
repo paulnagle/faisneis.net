@@ -19,13 +19,21 @@
     </ion-select>
   </ion-item>
 
-  <ion-item>
-        <ion-label>House No</ion-label>
-    <ion-range [(ngModel)]="houseNo" min="1" max="33" snaps=true ticks=true pin=true  deBounce=500 (ngModelChange)="getAllParties()">
-      <ion-label slot="start">1</ion-label>
-      <ion-label slot="end">33</ion-label>
-    </ion-range>
-  </ion-item>
+  <div *ngIf="result_num_dail" >
+    <div *ngIf="result_num_dail.head">
+      <div *ngIf="result_num_dail.head.counts">
+        <div *ngIf="result_num_dail.head.counts.housesCount">
+          <ion-item>
+            <ion-label>House No</ion-label>
+            <ion-range [(ngModel)]="houseNo" min="1" max="{{result_num_dail.head.counts.housesCount}}" snaps=true ticks=true pin=true  deBounce=500 (ngModelChange)="getAllParties()">
+              <ion-label slot="start">1</ion-label>
+              <ion-label slot="end">{{result_num_dail.head.counts.housesCount}}</ion-label>
+            </ion-range>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div *ngIf="results" >
 
@@ -49,10 +57,20 @@
       </ion-card-content>
     </ion-card>
   </div>
-  <ion-item>
-    <ion-label>
-      N.B.
-    </ion-label>
-    There have been 33 Dails and 25 Seanads.
-  </ion-item>
+  
+  <div *ngIf="result_num_dail" >
+    <div *ngIf="result_num_dail.head">
+      <div *ngIf="result_num_dail.head.counts">
+        <div *ngIf="result_num_dail.head.counts.housesCount">
+          <ion-item>
+            <ion-label>
+              N.B.
+            </ion-label>
+              There have been {{result_num_dail.head.counts.housesCount}} Dails and 26 (or 30?) Seanads.
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </ion-content>

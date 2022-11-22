@@ -9,14 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-
-<!-- 
-  <ion-item>
-    <ion-label>Filter by Year -></ion-label>
-    <ion-datetime presentation="year" [(ngModel)]="myDate" min="1922" max="2022" (ngModelChange)="getAllLegislation()"></ion-datetime>
-  </ion-item> -->
-
+<ion-content>
 
   <ion-item>
     <ion-label>Pick a year <ion-icon name="arrow-forward-outline"></ion-icon></ion-label>
@@ -25,11 +18,13 @@
       id="date"
       class="ion-text-end"
     ></ion-input>
-    <ion-popover trigger="date" size="auto" animated="true" backdrop-dismiss="true" dismiss-on-select="true">
+    <ion-popover trigger="date" size="cover" animated="true" backdrop-dismiss="true" dismiss-on-select="true">
       <ng-template>
         <ion-datetime
+          size="cover"
           presentation="year"
           [(ngModel)]="myDate"
+          deBounce=500
           (ngModelChange)="getAllLegislation()"
           doneText="Done"
         ></ion-datetime>

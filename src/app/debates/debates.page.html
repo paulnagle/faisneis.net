@@ -18,13 +18,15 @@
       id="myDateInput"
       class="ion-text-end"
     ></ion-input>
-    <ion-popover trigger="myDateInput" size="auto" animated="true" backdrop-dismiss="true" dismiss-on-select="false">
+    <ion-popover trigger="myDateInput" size="cover" animated="true" backdrop-dismiss="true" dismiss-on-select="false">
       <ng-template>
         <ion-datetime 
+          size="cover"
           presentation="month-year" 
           [(ngModel)]="myDate" 
           min="{{minSelectableDate}}"
           max="{{maxSelectableDate}}"
+          deBounce=500
           (ngModelChange)="getAllDebates()" 
           doneText="Done">
         </ion-datetime>

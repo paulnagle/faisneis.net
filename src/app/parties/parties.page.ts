@@ -9,6 +9,7 @@ import { LoadingService } from '../service/loading.service';
 export class PartiesPage implements OnInit {
 
   results;
+  result_num_dail;
   chamberType = 'dail';
   houseNo = '33';
   shownCard;
@@ -19,15 +20,20 @@ export class PartiesPage implements OnInit {
 
   ngOnInit() {
     this.getAllParties();
+    this.getNumDails();
+  }
+
+  getNumDails() {
+    this.partiesService.getNumDails().subscribe((data) => {
+      this.result_num_dail = data;
+    });
   }
 
   getAllParties() {
-
     this.loadingCtrl.present('Loading...');
     this.partiesService.getAllParties(this.chamberType, this.houseNo).subscribe((data) => {
       this.results = data;
       this.loadingCtrl.dismiss();
-      console.log(data);
     });
   }
 
